@@ -1,11 +1,10 @@
 name: flutter_get_native_icon
 description: "Get native icon as flutter widget, Get system desktop app icon and name."
-version: 0.0.1
-homepage:
+version: 0.0.2
+homepage: https://github.com/fluttercandies/flutter_get_native_icon
 
 environment:
-  sdk: ^3.5.3
-  flutter: '>=3.3.0'
+  sdk: ^3.0.3
 
 dependencies:
   flutter:
