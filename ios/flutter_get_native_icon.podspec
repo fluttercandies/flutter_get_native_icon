@@ -5,9 +5,9 @@
 Pod::Spec.new do |s|
   s.name             = 'flutter_get_native_icon'
   s.version          = '0.0.1'
-  s.summary          = 'A new Flutter plugin project.'
+  s.summary          = 'Get native icon as flutter widget, Get system desktop app icon and name.'
   s.description      = <<-DESC
-A new Flutter plugin project.
+Get native icon as flutter widget, Get system desktop app icon and name.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }

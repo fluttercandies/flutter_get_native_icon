@@ -1,5 +1,5 @@
 name: flutter_get_native_icon
-description: "A new Flutter plugin project."
+description: "Get native icon as flutter widget, Get system desktop app icon and name."
 version: 0.0.1
 homepage:
 
