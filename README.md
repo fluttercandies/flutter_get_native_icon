@@ -10,7 +10,7 @@ depend on the plugin in your `pubspec.yaml` file.
 
 ```yaml
 dependencies:
-  flutter_get_native_icon: ^0.0.1
+  flutter_get_native_icon: ^0.0.2
 ```
 
 import the plugin.
