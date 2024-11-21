@@ -1,6 +1,6 @@
 # flutter_get_native_icon
 
-Get native icon as flutter widget.
+Get native icon as flutter widget, Get system desktop app icon and name.
 
 only support ios now.
 
