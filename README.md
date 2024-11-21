@@ -46,6 +46,17 @@ the `NativeAppIconWidget()` you can use in any where.
 - `alignment`: How to align the icon within its bounds.
 
 
+## About get native app Name
+see `package_info_plus` plugin and use code:
+```dart
+  Future<void> _loadAppInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      appName = packageInfo.appName;
+    });
+  }
+```
+
 ## picture
 ![App Icon](img/2024-11-21%2011.16.33.jpeg)
 
