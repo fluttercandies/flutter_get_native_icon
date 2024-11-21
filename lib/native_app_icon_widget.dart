@@ -28,42 +28,50 @@ class NativeAppIconWidget extends StatefulWidget {
 
 class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
   static const platform = MethodChannel('flutter_get_native_icon');
+  String? _appIconPath;
+  bool _isLoading = true;
+  String? _error;
 
-  Future<String> _getAppIconPath() async {
+  @override
+  void initState() {
+    super.initState();
+    _getAppIconPath();
+  }
+
+  Future<void> _getAppIconPath() async {
     try {
       final String result = await platform.invokeMethod('getAppIconPath');
-      print("get ios native icon result::$result");
-      return result;
+      setState(() {
+        _appIconPath = result;
+        _isLoading = false;
+      });
     } on PlatformException catch (e) {
-      print("Failed to get app icon path: '${e.message}'.");
-      return '';
+      setState(() {
+        _error = "Failed to get app icon path: '${e.message}'.";
+        _isLoading = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: _getAppIconPath(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
-        } else if (snapshot.hasError ||
-            !snapshot.hasData ||
-            snapshot.data!.isEmpty) {
-          return Text('Failed to load app icon');
-        } else {
-          return Image.memory(
-            base64Decode(snapshot.data!),
-            width: widget.width,
-            height: widget.height,
-            fit: widget.fit,
-            color: widget.color,
-            opacity: widget.opacity,
-            colorBlendMode: widget.colorBlendMode,
-            alignment: widget.alignment ?? Alignment.center,
-          );
-        }
-      },
-    );
+    if (_isLoading) {
+      return CircularProgressIndicator();
+    } else if (_error != null ||
+        _appIconPath == null ||
+        _appIconPath!.isEmpty) {
+      return Text('Failed to load app icon');
+    } else {
+      return Image.memory(
+        base64Decode(_appIconPath!),
+        width: widget.width,
+        height: widget.height,
+        fit: widget.fit,
+        color: widget.color,
+        opacity: widget.opacity,
+        colorBlendMode: widget.colorBlendMode,
+        alignment: widget.alignment ?? Alignment.center,
+      );
+    }
   }
 }
