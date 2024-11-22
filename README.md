@@ -35,6 +35,14 @@ Widget build(BuildContext context) {
 
 the `NativeAppIconWidget()` you can use in any where.
 
+# Recommended Tools
+use flutter_launcher_icons to generate the app icon.
+pub: https://pub.dev/packages/flutter_launcher_icons
+
+and please do not use `icons_launcher` because
+https://github.com/mrrhak/icons_launcher/issues/70
+
+
 ## Properties
 
 - `width`: The width of the icon.
