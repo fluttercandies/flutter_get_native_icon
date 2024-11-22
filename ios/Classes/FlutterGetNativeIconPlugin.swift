@@ -26,7 +26,7 @@ public class FlutterGetNativeIconPlugin: NSObject, FlutterPlugin {
     }
     
     func getAppIcon() -> UIImage? {
-        // 获取 Info.plist 中的 CFBundleIcons
+        // get the CFBundleIcons of Info.plist.
         guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
               let primaryIcons = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
               let iconFiles = primaryIcons["CFBundleIconFiles"] as? [String],
@@ -35,7 +35,7 @@ public class FlutterGetNativeIconPlugin: NSObject, FlutterPlugin {
             return nil
         }
         
-        // 加载应用程序图标
+        // Get the App icon image
         return UIImage(named: lastIconName)
     }
 }

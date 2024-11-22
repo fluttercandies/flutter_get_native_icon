@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -46,6 +47,9 @@ class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
         _isLoading = false;
       });
     } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print("[plugin] flutter_get_native_icon\n_NativeAppIconWidgetState::_error ==> ${e.toString()}");
+      }
       setState(() {
         _error = "Failed to get app icon path: '${e.message}'.";
         _isLoading = false;
