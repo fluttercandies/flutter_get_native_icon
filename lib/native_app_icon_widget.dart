@@ -13,7 +13,7 @@ class NativeAppIconWidget extends StatefulWidget {
   final Animation<double>? opacity;
   final AlignmentGeometry? alignment;
 
-  NativeAppIconWidget({
+  const NativeAppIconWidget({
     this.width,
     this.height,
     this.fit,
@@ -21,10 +21,11 @@ class NativeAppIconWidget extends StatefulWidget {
     this.color,
     this.opacity,
     this.alignment,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _NativeAppIconWidgetState createState() => _NativeAppIconWidgetState();
+  State<NativeAppIconWidget> createState() => _NativeAppIconWidgetState();
 }
 
 class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
@@ -48,7 +49,8 @@ class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
       });
     } on PlatformException catch (e) {
       if (kDebugMode) {
-        print("[plugin] flutter_get_native_icon\n_NativeAppIconWidgetState::_error ==> ${e.toString()}");
+        print(
+            "[plugin] flutter_get_native_icon\n_NativeAppIconWidgetState::_error ==> ${e.toString()}");
       }
       setState(() {
         _error = "Failed to get app icon path: '${e.message}'.";
@@ -60,11 +62,11 @@ class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     } else if (_error != null ||
         _appIconPath == null ||
         _appIconPath!.isEmpty) {
-      return Text('Failed to load app icon');
+      return const Text('Failed to load app icon');
     } else {
       return Image.memory(
         base64Decode(_appIconPath!),
