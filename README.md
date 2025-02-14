@@ -45,13 +45,18 @@ https://github.com/mrrhak/icons_launcher/issues/70
 
 ## Properties
 
-- `width`: The width of the icon.
-- `height`: The height of the icon.
-- `fit`: How the icon should be inscribed into the space allocated during layout.
-- `colorBlendMode`: The blend mode applied to the icon.
-- `color`: The color to use when drawing the icon.
-- `opacity`: The opacity to apply to the icon.
-- `alignment`: How to align the icon within its bounds.
+| Property | Type | Description |
+|----------|------|-------------|
+| `width` | `double?` | The width of the icon |
+| `height` | `double?` | The height of the icon |
+| `fit` | `BoxFit?` | How the icon should be inscribed into its box |
+| `color` | `Color?` | The color to tint the icon with |
+| `colorBlendMode` | `BlendMode?` | The blend mode for applying the color |
+| `opacity` | `Animation<double>?` | The opacity of the icon |
+| `alignment` | `AlignmentGeometry?` | How to align the icon within its bounds |
+| `margin` | `EdgeInsetsGeometry?` | The margin around the icon |
+| `shape` | `BoxShape` | The shape of the icon (rectangle or circle) |
+| `borderRadius` | `BorderRadius?` | The border radius when shape is rectangle |
 
 
 ## About get native app Name

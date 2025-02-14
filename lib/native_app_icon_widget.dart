@@ -12,6 +12,9 @@ class NativeAppIconWidget extends StatefulWidget {
   final Color? color;
   final Animation<double>? opacity;
   final AlignmentGeometry? alignment;
+  final EdgeInsetsGeometry? margin;
+  final BoxShape shape;
+  final BorderRadius? borderRadius;
 
   const NativeAppIconWidget({
     this.width,
@@ -21,6 +24,9 @@ class NativeAppIconWidget extends StatefulWidget {
     this.color,
     this.opacity,
     this.alignment,
+    this.margin,
+    this.shape = BoxShape.rectangle,
+    this.borderRadius,
     Key? key,
   }) : super(key: key);
 
@@ -61,14 +67,16 @@ class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Widget content;
+
     if (_isLoading) {
-      return const CircularProgressIndicator();
+      content = const CircularProgressIndicator();
     } else if (_error != null ||
         _appIconPath == null ||
         _appIconPath!.isEmpty) {
-      return const Text('Failed to load app icon');
+      content = const Text('Failed to load app icon');
     } else {
-      return Image.memory(
+      content = Image.memory(
         base64Decode(_appIconPath!),
         width: widget.width,
         height: widget.height,
@@ -78,6 +86,28 @@ class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
         colorBlendMode: widget.colorBlendMode,
         alignment: widget.alignment ?? Alignment.center,
       );
+
+      if (widget.shape == BoxShape.circle || widget.borderRadius != null) {
+        content = ClipPath(
+          clipper: ShapeBorderClipper(
+            shape: widget.shape == BoxShape.circle
+                ? const CircleBorder()
+                : RoundedRectangleBorder(
+                    borderRadius: widget.borderRadius ?? BorderRadius.zero,
+                  ),
+          ),
+          child: content,
+        );
+      }
     }
+
+    if (widget.margin != null) {
+      content = Padding(
+        padding: widget.margin!,
+        child: content,
+      );
+    }
+
+    return content;
   }
 }
