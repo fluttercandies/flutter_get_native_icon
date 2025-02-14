@@ -17,9 +17,9 @@ class NativeAppIconWidget extends StatefulWidget {
   final BorderRadius? borderRadius;
 
   const NativeAppIconWidget({
-    this.width,
-    this.height,
-    this.fit,
+    this.width = 40,
+    this.height = 40,
+    this.fit = BoxFit.cover,
     this.colorBlendMode,
     this.color,
     this.opacity,
@@ -35,6 +35,60 @@ class NativeAppIconWidget extends StatefulWidget {
 }
 
 class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
+  late final Widget _cachedIcon;
+
+  @override
+  void initState() {
+    super.initState();
+    _cachedIcon = _AppIcon(
+      width: widget.width,
+      height: widget.height,
+      fit: widget.fit,
+      colorBlendMode: widget.colorBlendMode,
+      color: widget.color,
+      opacity: widget.opacity,
+      alignment: widget.alignment,
+      margin: widget.margin,
+      shape: widget.shape,
+      borderRadius: widget.borderRadius,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => _cachedIcon;
+}
+
+class _AppIcon extends StatefulWidget {
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
+  final BlendMode? colorBlendMode;
+  final Color? color;
+  final Animation<double>? opacity;
+  final AlignmentGeometry? alignment;
+  final EdgeInsetsGeometry? margin;
+  final BoxShape shape;
+  final BorderRadius? borderRadius;
+
+  const _AppIcon({
+    this.width,
+    this.height,
+    this.fit,
+    this.colorBlendMode,
+    this.color,
+    this.opacity,
+    this.alignment,
+    this.margin,
+    this.shape = BoxShape.rectangle,
+    this.borderRadius,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_AppIcon> createState() => __AppIconState();
+}
+
+class __AppIconState extends State<_AppIcon> {
   static const platform = MethodChannel('flutter_get_native_icon');
   String? _appIconPath;
   bool _isLoading = true;
@@ -56,7 +110,7 @@ class _NativeAppIconWidgetState extends State<NativeAppIconWidget> {
     } on PlatformException catch (e) {
       if (kDebugMode) {
         print(
-            "[plugin] flutter_get_native_icon\n_NativeAppIconWidgetState::_error ==> ${e.toString()}");
+            "[plugin] flutter_get_native_icon\n__AppIconState::_error ==> ${e.toString()}");
       }
       setState(() {
         _error = "Failed to get app icon path: '${e.message}'.";

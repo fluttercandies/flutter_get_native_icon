@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Fix: The icon will build when setstate every times.
+
 ## 0.0.3
 
 * NativeAppIconWidget: only get data once when initState, to prevent the icon from being reloaded when the widget is rebuilt.
