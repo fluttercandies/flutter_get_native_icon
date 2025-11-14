@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Support android.
+
 ## 0.0.4
 
 * Fix: The icon will build when setstate every times.
